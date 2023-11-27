@@ -23,7 +23,7 @@ jobs:
       run: dotnet publish BlazorDI -c Release -o build --no-restore
 
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@releases/v3
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages  # デプロイするGitHub Pagesのブランチ
