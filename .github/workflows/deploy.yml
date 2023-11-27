@@ -1,0 +1,29 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0'  # 使用する.NETのバージョン
+
+    - name: Build and Publish
+      run: |
+        dotnet publish BlazorDI -c Release -o build --no-restore
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages  # デプロイするGitHub Pagesのブランチ
+        FOLDER: build     # ビルドしたファイルがあるディレクトリ
+        CLEAN: true       # 古いコンテンツを削除
