@@ -1,0 +1,6 @@
+﻿@page "/example"
+@using BlazorDI.Service
+@inject IMessageService MessageService
+
+// IMessageServiceとMessageServiceが定義されている名前空間
+<h1>@MessageService.GetMessage()</h1>
