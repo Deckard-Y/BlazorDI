@@ -14,11 +14,13 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '8.0'  # 使用する.NETのバージョン
+        dotnet-version: '8.9'  # またはプロジェクトに適した.NETバージョン
+
+    - name: Restore dependencies
+      run: dotnet restore BlazorDI/BlazorDI.csproj  # プロジェクトファイルのパスを適宜調整
 
     - name: Build and Publish
-      run: |
-        dotnet publish BlazorDI -c Release -o build --no-restore
+      run: dotnet publish BlazorDI -c Release -o build --no-restore
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
